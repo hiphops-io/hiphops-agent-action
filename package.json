@@ -1,0 +1,13 @@
+{
+  "name": "hiphops-agent-action",
+  "version": "0.1.0",
+  "description": "Hiphop's GitHub Actions Agent",
+  "main": "index.js",
+  "repository": "https://github.com/hiphops-io/hiphops-agent-action",
+  "author": "tom@hiphops.io",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0"
+  }
+}
