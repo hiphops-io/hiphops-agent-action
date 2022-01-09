@@ -11502,14 +11502,29 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
-try {
-  console.log(`Testing dispatch payload`);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
-  console.log(`The event payload: ${payload}`);
-} catch (error) {
-  core.setFailed(error.message);
+async function run() {
+  try {
+    console.log(`Testing dispatch payload`);
+    // Get the JSON webhook payload for the event that triggered the workflow
+    const payload = JSON.stringify(github.context.payload, undefined, 2);
+    console.log(`The event payload: ${payload}`);
+
+    console.log("Testing release creation");
+    const token = core.getInput("token");
+    const octokit = github.getOctokit(token);
+    const response = await octokit.rest.repos.createRelease({
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      tag_name: "v1.0.0",
+      target_commitish: "main",
+    });
+    console.log(response);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
+
+run();
 
 })();
 

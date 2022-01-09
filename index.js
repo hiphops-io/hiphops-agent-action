@@ -8,6 +8,7 @@ async function run() {
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`The event payload: ${payload}`);
 
+    console.log("Testing release creation");
     const token = core.getInput("token");
     const octokit = github.getOctokit(token);
     const response = await octokit.rest.repos.createRelease({
