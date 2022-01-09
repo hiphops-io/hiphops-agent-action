@@ -1,6 +1,11 @@
 
 name: 'Hiphops Agent'
 description: 'Allows Hiphops to interact with GitHub without exposing source code'
+inputs:
+  payload:
+    description: 'The Hiphops payload'
+    required: true
+    default: 'Hello World'
 runs:
   using: 'node16'
   main: 'dist/index.js'
