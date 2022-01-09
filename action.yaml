@@ -1,6 +1,10 @@
 
 name: 'Hiphops Agent'
 description: 'Allows Hiphops to interact with GitHub without exposing source code'
+inputs:
+  token:
+    description: 'A GitHub token with access equal to the default GITHUB_TOKEN with permissive config'
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'
