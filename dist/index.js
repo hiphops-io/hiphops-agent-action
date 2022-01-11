@@ -11514,6 +11514,7 @@ async function run() {
     const octokit = github.getOctokit(token);
 
     // Try to create the release, capture the error if not.
+    console.log("Creating release with error callback");
     const response = await octokit.rest.repos.createRelease(
       {
         owner: github.context.repo.owner,
