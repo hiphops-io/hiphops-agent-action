@@ -11511,7 +11511,7 @@ async function run() {
     const token = core.getInput("token");
     const octokit = github.getOctokit(token);
 
-    console.log("--- 001");
+    console.log("--- 002");
     // Try to create the release, capture the error if not.
     const response = await octokit.rest.repos
       .createRelease({
@@ -11521,8 +11521,13 @@ async function run() {
         target_commitish: "main",
       })
       .catch((err) => {
-        console.log("Error thrown.");
-        console.log(err);
+        // GitHub API throws 422 if a release with this tag already exists.
+        if (err.status === 422) {
+          // Try updating instead
+          console.log("422 received, trying to update");
+        } else {
+          throw err;
+        }
       });
 
     console.log(response);
