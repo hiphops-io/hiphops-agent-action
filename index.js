@@ -27,7 +27,9 @@ async function run() {
         );
       });
 
-    console.log("Release created successfully.", response);
+    if (response.status === 201) {
+      core.info(`Successfully created release '${tag_name}'`);
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
