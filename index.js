@@ -28,7 +28,7 @@ async function run() {
         );
       });
 
-    if (response.status === 201) {
+    if (response?.status === 201) {
       core.info(`Successfully created release '${tagName}'`);
     }
   } catch (error) {
