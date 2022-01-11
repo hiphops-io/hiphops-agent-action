@@ -29,7 +29,7 @@ async function run() {
       });
 
     if (response?.status === 201) {
-      core.info(`Successfully created release '${tagName}'`);
+      core.notice(`Successfully created release '${tagName}'`);
     }
   } catch (error) {
     core.setFailed(error.message);
