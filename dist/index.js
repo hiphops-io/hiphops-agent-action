@@ -11524,11 +11524,13 @@ async function run() {
           throw err;
         }
         core.warning(
-          `A release with the tag ${tag_name} already exists. Skipping creation.`
+          `A release with the tag '${tag_name}' already exists. Skipping creation.`
         );
       });
 
-    console.log("Release created successfully.", response);
+    if (response.status === 201) {
+      core.info(`Successfully created release '${tag_name}'`);
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
