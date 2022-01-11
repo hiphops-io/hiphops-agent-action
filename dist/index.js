@@ -8316,7 +8316,7 @@ exports.createRelease = async (payload) => {
 
 const github = __nccwpck_require__(5438);
 
-const createRelease = __nccwpck_require__(2433);
+const { createRelease } = __nccwpck_require__(2433);
 
 const routeInstruction = async () => {
   // For debugging

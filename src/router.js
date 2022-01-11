@@ -1,6 +1,6 @@
 const github = require("@actions/github");
 
-const createRelease = require("./releases");
+const { createRelease } = require("./releases");
 
 const routeInstruction = async () => {
   // For debugging
