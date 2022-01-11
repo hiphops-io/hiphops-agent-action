@@ -8322,7 +8322,9 @@ const routeInstruction = async () => {
   // For debugging
   console.log(JSON.stringify(github.context.payload, null, 2));
 
-  const { name, ...body } = JSON.parse(github.context.inputs.instruction);
+  const { name, ...body } = JSON.parse(
+    github.context.payload.inputs.instruction
+  );
 
   switch (name) {
     case "create_release":
