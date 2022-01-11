@@ -10,7 +10,7 @@ async function run() {
     const token = core.getInput("token");
     const octokit = github.getOctokit(token);
 
-    console.log("--- 002");
+    console.log("--- 003");
     // Try to create the release, capture the error if not.
     const response = await octokit.rest.repos
       .createRelease({
@@ -24,12 +24,13 @@ async function run() {
         if (err.status === 422) {
           // Try updating instead
           console.log("422 received, trying to update");
+          return "Foo";
         } else {
           throw err;
         }
       });
 
-    console.log(response);
+    console.log(`Response was: ${response}`);
   } catch (error) {
     core.setFailed(error.message);
   }
