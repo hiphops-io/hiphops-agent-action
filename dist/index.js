@@ -8319,6 +8319,9 @@ const github = __nccwpck_require__(5438);
 const createRelease = __nccwpck_require__(2433);
 
 const routeInstruction = async () => {
+  // For debugging
+  console.log(JSON.stringify(github.context.payload, null, 2));
+
   const { name, ...body } = JSON.parse(github.context.inputs.instruction);
 
   switch (name) {

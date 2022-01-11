@@ -3,6 +3,9 @@ const github = require("@actions/github");
 const createRelease = require("./releases");
 
 const routeInstruction = async () => {
+  // For debugging
+  console.log(JSON.stringify(github.context.payload, null, 2));
+
   const { name, ...body } = JSON.parse(github.context.inputs.instruction);
 
   switch (name) {
