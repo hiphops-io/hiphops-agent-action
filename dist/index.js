@@ -11506,6 +11506,7 @@ async function run() {
   try {
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2);
+    const tagName = "v1.0.0";
 
     const token = core.getInput("token");
     const octokit = github.getOctokit(token);
@@ -11515,7 +11516,7 @@ async function run() {
       .createRelease({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
-        tag_name: "v1.0.0",
+        tag_name: tagName,
         target_commitish: "main",
       })
       .catch((err) => {
@@ -11524,12 +11525,12 @@ async function run() {
           throw err;
         }
         core.warning(
-          `A release with the tag '${tag_name}' already exists. Skipping creation.`
+          `A release with the tag '${tagName}' already exists. Skipping creation.`
         );
       });
 
     if (response.status === 201) {
-      core.info(`Successfully created release '${tag_name}'`);
+      core.info(`Successfully created release '${tagName}'`);
     }
   } catch (error) {
     core.setFailed(error.message);
