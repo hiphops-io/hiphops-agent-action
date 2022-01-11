@@ -23,7 +23,7 @@ async function run() {
           throw err;
         }
         core.warning(
-          `A release with the tag ${tag_name} already exists. Skipping creation.`
+          `A release with the tag '${tag_name}' already exists. Skipping creation.`
         );
       });
 
