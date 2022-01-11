@@ -11504,14 +11504,12 @@ const github = __nccwpck_require__(5438);
 
 async function run() {
   try {
-    console.log(`Testing dispatch payload`);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2);
 
     const token = core.getInput("token");
     const octokit = github.getOctokit(token);
 
-    console.log("--- 003");
     // Try to create the release, capture the error if not.
     const response = await octokit.rest.repos
       .createRelease({
@@ -11522,16 +11520,15 @@ async function run() {
       })
       .catch((err) => {
         // GitHub API throws 422 if a release with this tag already exists.
-        if (err.status === 422) {
-          // Try updating instead
-          console.log("422 received, trying to update");
-          return "Foo";
-        } else {
+        if (err.status !== 422) {
           throw err;
         }
+        core.warning(
+          "A release with this tag already exists. Skipping creation."
+        );
       });
 
-    console.log(`Response was: ${response}`);
+    console.log("Release created successfully.", response);
   } catch (error) {
     core.setFailed(error.message);
   }
