@@ -11,12 +11,25 @@ async function run() {
     console.log("Testing release creation");
     const token = core.getInput("token");
     const octokit = github.getOctokit(token);
-    const response = await octokit.rest.repos.createRelease({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      tag_name: "v1.0.0",
-      target_commitish: "main",
-    });
+
+    // Try to create the release, capture the error if not.
+    const response = await octokit.rest.repos.createRelease(
+      {
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        tag_name: "v1.0.0",
+        target_commitish: "main",
+      },
+      function (err, res) {
+        if (err) {
+          console.log("Got an error!");
+          console.log(err);
+        } else {
+          console.log("Didn't get an error!");
+          console.log(JSON.stringify(res));
+        }
+      }
+    );
     console.log(response);
   } catch (error) {
     core.setFailed(error.message);
