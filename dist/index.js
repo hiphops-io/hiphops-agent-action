@@ -11530,7 +11530,7 @@ async function run() {
       });
 
     if (response?.status === 201) {
-      core.notice(`Successfully created release '${tagName}'`);
+      core.notice(`Created release '${tagName}'`);
     }
   } catch (error) {
     core.setFailed(error.message);
