@@ -1,18 +1,18 @@
 const github = require("@actions/github");
 
-const routePayload = async () => {
-  const { perform_action, ...payload } = JSON.parse(
-    github.context.inputs.payload
+const createRelease = require("./releases");
+
+const routeInstruction = async () => {
+  const { instruction_name, ...body } = JSON.parse(
+    github.context.inputs.instruction
   );
 
-  switch (perform_action) {
+  switch (instruction_name) {
     case "create_release":
-      return await createRelease(payload);
+      return await createRelease(body);
     default:
-      throw new Error(
-        `Unknown action: ${perform_action}. Perhaps you need to update your action version?`
-      );
+      throw new Error(`Unknown instruction: ${instruction_name}.`);
   }
 };
 
-module.exports = routePayload;
+module.exports = routeInstruction;
