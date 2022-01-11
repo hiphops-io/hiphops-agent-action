@@ -11533,7 +11533,9 @@ async function run() {
       core.notice(`Created release '${tagName}'`);
     }
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(
+      `hiphops-io/hiphops-agent-action failed with: ${error.message}`
+    );
   }
 }
 
